@@ -157,96 +157,45 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #241812;
-    background: var(--slide-background);
-    background-size: cover;
+    background-color: #f7f0e8;
+    background-image: var(--slide-background);
+    background-size: contain;
     background-position: center;
-  }
-
-  .attract-overlay.photo-mode {
-    color: #fff;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .attract-overlay.photo-mode .attract-panel {
-    justify-content: flex-end;
-    padding: 0 62px 58px;
-    border: 0;
-  }
-
-  .attract-overlay.photo-mode .attract-kicker,
-  .attract-overlay.photo-mode .attract-title,
-  .attract-overlay.photo-mode .attract-copy {
-    display: none;
-  }
-
-  .attract-overlay.photo-mode .tap-pill {
-    margin-left: auto;
-    background: rgba(255, 255, 255, 0.86);
-    box-shadow: 0 10px 30px rgba(55, 35, 20, 0.14);
-  }
-
-  .attract-overlay.photo-mode .slide-dots {
-    left: 62px;
-    bottom: 72px;
+    background-repeat: no-repeat;
   }
 
   .attract-overlay.active { display: flex; }
 
   .attract-panel {
     position: relative;
-    width: min(100vw, calc(100vh * 1448 / 1086));
-    height: min(100vh, calc(100vw * 1086 / 1448));
-    padding: 90px 82px 72px;
-    border: 1px solid rgba(60, 42, 27, 0.35);
+    width: 100vw;
+    height: 100vh;
+    padding: 0 62px 58px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  }
-
-  .attract-kicker {
-    color: #9b2420;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .attract-title {
-    width: 54%;
-    font-family: Georgia, serif;
-    font-size: 78px;
-    line-height: 1.02;
-    font-weight: 400;
-    margin-bottom: 22px;
-  }
-
-  .attract-copy {
-    width: 46%;
-    color: #5d5149;
-    font-size: 30px;
-    line-height: 1.38;
-    margin-bottom: 34px;
+    justify-content: flex-end;
+    pointer-events: none;
   }
 
   .tap-pill {
     width: max-content;
+    margin-left: auto;
     border: 1px solid rgba(155, 36, 32, 0.34);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.86);
     color: #9b2420;
     font-size: 22px;
     font-weight: 700;
     padding: 16px 26px;
     animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 10px 30px rgba(55, 35, 20, 0.14);
+    pointer-events: auto;
   }
 
   .slide-dots {
     position: absolute;
-    left: 82px;
-    bottom: 58px;
+    left: 62px;
+    bottom: 72px;
     display: flex;
     gap: 12px;
   }
@@ -339,102 +288,38 @@
 
 <div class="attract-overlay active" id="attract-overlay" onclick="wakeUp()">
   <div class="attract-panel">
-    <div class="attract-kicker" id="attract-kicker"></div>
-    <h2 class="attract-title" id="attract-title"></h2>
-    <p class="attract-copy" id="attract-copy"></p>
-    <div class="tap-pill">Tap to explore desserts and tea</div>
-    <div class="slide-dots" aria-hidden="true">
-      <div class="slide-dot active"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-      <div class="slide-dot"></div>
-    </div>
+    <div class="tap-pill">Tap to explore</div>
+    <div class="slide-dots" aria-hidden="true" id="slide-dots"></div>
   </div>
 </div>
 
 <script>
   const AUTO_RETURN = 20000;
   const IDLE_TIME = 30000;
-  const SLIDE_TIME = 5500;
+  const SLIDE_TIME_PHOTO = 5500;
+  const SLIDE_TIME_INFO = 11000;
+  const V = '?v=20260504-clean';
   const attractSlides = [
-    {
-      kicker: 'Desserts and tea',
-      title: 'A quiet table for sweet moments.',
-      copy: 'Browse pineapple cakes, custom cakes, and Taiwan high mountain tea.',
-      image: 'url("dessert 首頁.png?v=20260504-review")',
-      mode: 'text'
-    },
-    {
-      kicker: 'Custom cake gallery',
-      title: '',
-      copy: '',
-      image: 'url("蛋糕1.png?v=20260504-gallery")',
-      mode: 'photo'
-    },
-    {
-      kicker: 'Custom cake gallery',
-      title: '',
-      copy: '',
-      image: 'url("蛋糕2.png?v=20260504-gallery")',
-      mode: 'photo'
-    },
-    {
-      kicker: 'Custom cake gallery',
-      title: '',
-      copy: '',
-      image: 'url("蛋糕3.png?v=20260504-gallery")',
-      mode: 'photo'
-    },
-    {
-      kicker: 'Custom cakes',
-      title: 'Made for birthdays and special days.',
-      copy: 'Explore cake styles, flavors, sizes, and preorder details.',
-      image: 'url("cake home 橫式.png?v=20260504-cake-home")',
-      mode: 'text'
-    },
-    {
-      kicker: 'Custom cake gallery',
-      title: '',
-      copy: '',
-      image: 'url("蛋糕4.png?v=20260504-gallery")',
-      mode: 'photo'
-    },
-    {
-      kicker: 'Custom cake gallery',
-      title: '',
-      copy: '',
-      image: 'url("蛋糕5.png?v=20260504-gallery")',
-      mode: 'photo'
-    },
-    {
-      kicker: 'Custom cake gallery',
-      title: '',
-      copy: '',
-      image: 'url("蛋糕6.png?v=20260504-gallery")',
-      mode: 'photo'
-    },
-    {
-      kicker: 'High mountain tea',
-      title: 'Pair warm tea with Taiwanese sweets.',
-      copy: 'Ask us about tea pairings, seasonal desserts, and cake availability.',
-      image: 'url("高山烏龍內頁.png?v=20260504-dessert")',
-      mode: 'text'
-    },
-    {
-      kicker: 'Stay connected',
-      title: 'Follow us or leave a review.',
-      copy: 'Scan the QR codes to find us on Instagram or share your TaiwanWay experience.',
-      image: 'url("review 內頁.png?v=20260504-review")',
-      mode: 'text'
-    }
+    { image: 'url("dessert 首頁.png' + V + '")',     duration: SLIDE_TIME_INFO  },
+    { image: 'url("蛋糕1.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
+    { image: 'url("蛋糕2.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
+    { image: 'url("蛋糕3.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
+    { image: 'url("cake home 橫式.png' + V + '")',  duration: SLIDE_TIME_INFO  },
+    { image: 'url("蛋糕4.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
+    { image: 'url("蛋糕5.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
+    { image: 'url("蛋糕6.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
+    { image: 'url("高山烏龍內頁.png' + V + '")',     duration: SLIDE_TIME_INFO  },
+    { image: 'url("review 內頁.png' + V + '")',      duration: SLIDE_TIME_INFO  }
   ];
+
+  (function buildDots() {
+    const dotsEl = document.getElementById('slide-dots');
+    for (let i = 0; i < attractSlides.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+      dotsEl.appendChild(dot);
+    }
+  })();
 
   let returnTimer = null;
   let idleTimer = null;
@@ -486,32 +371,32 @@
   }
 
   function showAttract() {
-    clearInterval(attractTimer);
+    clearTimeout(attractTimer);
     setSlide(activeSlide);
     document.getElementById('attract-overlay').classList.add('active');
-    attractTimer = setInterval(nextSlide, SLIDE_TIME);
+    scheduleNextSlide();
   }
 
   function hideAttract() {
-    clearInterval(attractTimer);
+    clearTimeout(attractTimer);
     document.getElementById('attract-overlay').classList.remove('active');
   }
 
   function nextSlide() {
     activeSlide = (activeSlide + 1) % attractSlides.length;
     setSlide(activeSlide);
+    scheduleNextSlide();
+  }
+
+  function scheduleNextSlide() {
+    clearTimeout(attractTimer);
+    attractTimer = setTimeout(nextSlide, attractSlides[activeSlide].duration);
   }
 
   function setSlide(index) {
     const slide = attractSlides[index];
     const overlay = document.getElementById('attract-overlay');
-    const textGradient = 'linear-gradient(90deg, rgba(251,247,240,0.96) 0%, rgba(251,247,240,0.90) 43%, rgba(251,247,240,0.36) 100%)';
-    const photoGradient = 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(40,28,18,0.10) 58%, rgba(40,28,18,0.38) 100%)';
-    overlay.classList.toggle('photo-mode', slide.mode === 'photo');
-    overlay.style.setProperty('--slide-background', (slide.mode === 'photo' ? photoGradient : textGradient) + ', ' + slide.image);
-    document.getElementById('attract-kicker').textContent = slide.kicker;
-    document.getElementById('attract-title').textContent = slide.title;
-    document.getElementById('attract-copy').textContent = slide.copy;
+    overlay.style.setProperty('--slide-background', slide.image);
     document.querySelectorAll('.slide-dot').forEach((dot, dotIndex) => {
       dot.classList.toggle('active', dotIndex === index);
     });
