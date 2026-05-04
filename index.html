@@ -122,8 +122,8 @@
 
   .back-btn {
     position: absolute;
-    top: 3%;
-    left: 2%;
+    bottom: 3%;
+    right: 2%;
     z-index: 10;
     width: 46px;
     height: 46px;
@@ -299,19 +299,21 @@
   const SLIDE_TIME_PHOTO = 5500;
   const SLIDE_TIME_INFO = 11000;
   const SLIDE_TIME_FEATURE = 15000;
-  const V = '?v=20260504-pineapple-cakes';
+  const V = '?v=20260504-beef-pork';
   const attractSlides = [
-    { image: 'url("dessert 首頁.png' + V + '")',     duration: SLIDE_TIME_INFO  },
+    { image: 'url("dessert 首頁.png' + V + '")',     duration: SLIDE_TIME_INFO    },
     { image: 'url("鳳梨酥內頁.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
-    { image: 'url("蛋糕1.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
-    { image: 'url("蛋糕2.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
-    { image: 'url("蛋糕3.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
-    { image: 'url("cake home 橫式.png' + V + '")',  duration: SLIDE_TIME_INFO  },
-    { image: 'url("蛋糕4.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
-    { image: 'url("蛋糕5.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
-    { image: 'url("蛋糕6.png' + V + '")',           duration: SLIDE_TIME_PHOTO },
-    { image: 'url("高山烏龍內頁.png' + V + '")',     duration: SLIDE_TIME_INFO  },
-    { image: 'url("review 內頁.png' + V + '")',      duration: SLIDE_TIME_INFO  }
+    { image: 'url("蛋糕1.png' + V + '")',           duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("蛋糕2.png' + V + '")',           duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("蛋糕3.png' + V + '")',           duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("cake home 橫式.png' + V + '")',  duration: SLIDE_TIME_INFO    },
+    { image: 'url("蛋糕4.png' + V + '")',           duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("蛋糕5.png' + V + '")',           duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("蛋糕6.png' + V + '")',           duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("牛肉麵介紹.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
+    { image: 'url("滷肉飯介紹.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
+    { image: 'url("高山烏龍內頁.png' + V + '")',     duration: SLIDE_TIME_INFO    },
+    { image: 'url("review 內頁.png' + V + '")',      duration: SLIDE_TIME_INFO    }
   ];
 
   (function buildDots() {
