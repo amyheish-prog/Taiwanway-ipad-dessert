@@ -1,0 +1,18 @@
+TaiwanWay 甜點 iPad 播放頁
+============================
+
+iPad 播放網址：
+https://amyheish-prog.github.io/Taiwanway-ipad-dessert/
+
+GitHub Repo：
+https://github.com/amyheish-prog/Taiwanway-ipad-dessert
+
+iPad 開啟方式：
+1. 用 Documents by Readdle App 打開上面網址
+2. 或直接雙擊本資料夾的「iPad 播放網址.webloc」
+
+更新流程（電腦端）：
+cd "~/Desktop/ipad dessert 播放"
+git add -A
+git commit -m "更新內容"
+git push
