@@ -158,11 +158,38 @@
     justify-content: center;
     cursor: pointer;
     color: #241812;
-    background:
-      linear-gradient(90deg, rgba(251,247,240,0.96) 0%, rgba(251,247,240,0.90) 43%, rgba(251,247,240,0.36) 100%),
-      var(--slide-image);
+    background: var(--slide-background);
     background-size: cover;
     background-position: center;
+  }
+
+  .attract-overlay.photo-mode {
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .attract-overlay.photo-mode .attract-panel {
+    justify-content: flex-end;
+    padding: 0 62px 58px;
+    border: 0;
+  }
+
+  .attract-overlay.photo-mode .attract-kicker,
+  .attract-overlay.photo-mode .attract-title,
+  .attract-overlay.photo-mode .attract-copy {
+    display: none;
+  }
+
+  .attract-overlay.photo-mode .tap-pill {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 10px 30px rgba(55, 35, 20, 0.14);
+  }
+
+  .attract-overlay.photo-mode .slide-dots {
+    left: 62px;
+    bottom: 72px;
   }
 
   .attract-overlay.active { display: flex; }
@@ -321,6 +348,13 @@
       <div class="slide-dot"></div>
       <div class="slide-dot"></div>
       <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
     </div>
   </div>
 </div>
@@ -334,25 +368,71 @@
       kicker: 'Desserts and tea',
       title: 'A quiet table for sweet moments.',
       copy: 'Browse pineapple cakes, custom cakes, and Taiwan high mountain tea.',
-      image: 'url("dessert 首頁.png?v=20260504-review")'
+      image: 'url("dessert 首頁.png?v=20260504-review")',
+      mode: 'text'
+    },
+    {
+      kicker: 'Custom cake gallery',
+      title: '',
+      copy: '',
+      image: 'url("蛋糕1.png?v=20260504-gallery")',
+      mode: 'photo'
+    },
+    {
+      kicker: 'Custom cake gallery',
+      title: '',
+      copy: '',
+      image: 'url("蛋糕2.png?v=20260504-gallery")',
+      mode: 'photo'
+    },
+    {
+      kicker: 'Custom cake gallery',
+      title: '',
+      copy: '',
+      image: 'url("蛋糕3.png?v=20260504-gallery")',
+      mode: 'photo'
     },
     {
       kicker: 'Custom cakes',
       title: 'Made for birthdays and special days.',
       copy: 'Explore cake styles, flavors, sizes, and preorder details.',
-      image: 'url("cake home 橫式.png?v=20260504-cake-home")'
+      image: 'url("cake home 橫式.png?v=20260504-cake-home")',
+      mode: 'text'
+    },
+    {
+      kicker: 'Custom cake gallery',
+      title: '',
+      copy: '',
+      image: 'url("蛋糕4.png?v=20260504-gallery")',
+      mode: 'photo'
+    },
+    {
+      kicker: 'Custom cake gallery',
+      title: '',
+      copy: '',
+      image: 'url("蛋糕5.png?v=20260504-gallery")',
+      mode: 'photo'
+    },
+    {
+      kicker: 'Custom cake gallery',
+      title: '',
+      copy: '',
+      image: 'url("蛋糕6.png?v=20260504-gallery")',
+      mode: 'photo'
     },
     {
       kicker: 'High mountain tea',
       title: 'Pair warm tea with Taiwanese sweets.',
       copy: 'Ask us about tea pairings, seasonal desserts, and cake availability.',
-      image: 'url("高山烏龍內頁.png?v=20260504-dessert")'
+      image: 'url("高山烏龍內頁.png?v=20260504-dessert")',
+      mode: 'text'
     },
     {
       kicker: 'Stay connected',
       title: 'Follow us or leave a review.',
       copy: 'Scan the QR codes to find us on Instagram or share your TaiwanWay experience.',
-      image: 'url("review 內頁.png?v=20260504-review")'
+      image: 'url("review 內頁.png?v=20260504-review")',
+      mode: 'text'
     }
   ];
 
@@ -425,7 +505,10 @@
   function setSlide(index) {
     const slide = attractSlides[index];
     const overlay = document.getElementById('attract-overlay');
-    overlay.style.setProperty('--slide-image', slide.image);
+    const textGradient = 'linear-gradient(90deg, rgba(251,247,240,0.96) 0%, rgba(251,247,240,0.90) 43%, rgba(251,247,240,0.36) 100%)';
+    const photoGradient = 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(40,28,18,0.10) 58%, rgba(40,28,18,0.38) 100%)';
+    overlay.classList.toggle('photo-mode', slide.mode === 'photo');
+    overlay.style.setProperty('--slide-background', (slide.mode === 'photo' ? photoGradient : textGradient) + ', ' + slide.image);
     document.getElementById('attract-kicker').textContent = slide.kicker;
     document.getElementById('attract-title').textContent = slide.title;
     document.getElementById('attract-copy').textContent = slide.copy;
