@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Taiwan Way Dessert iPad</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #f7f0e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .page {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page.active { display: flex; animation: fadeIn 0.25s ease; }
+
+  .stage {
+    position: relative;
+    width: min(100vw, calc(100vh * 1448 / 1086));
+    height: min(100vh, calc(100vw * 1086 / 1448));
+  }
+
+  .stage img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .contain-page {
+    width: 100%;
+    height: 100%;
+    background: #fbf7f0;
+    border: 1px solid rgba(60, 42, 27, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .contain-page img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .tap-zone {
+    position: absolute;
+    z-index: 5;
+    border: 0;
+    background: transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+
+  .tap-zone:active {
+    background: rgba(139, 90, 43, 0.10);
+    box-shadow: inset 0 0 0 3px rgba(155, 36, 32, 0.18);
+    transform: scale(0.985);
+  }
+
+  #btn-pineapple {
+    left: 4.0%;
+    top: 43.5%;
+    width: 24.6%;
+    height: 18.0%;
+  }
+
+  #btn-tea {
+    left: 29.4%;
+    top: 43.5%;
+    width: 23.0%;
+    height: 18.0%;
+  }
+
+  #btn-custom-cake {
+    left: 4.0%;
+    top: 62.7%;
+    width: 24.6%;
+    height: 18.5%;
+  }
+
+  #btn-review {
+    left: 29.4%;
+    top: 62.7%;
+    width: 23.0%;
+    height: 18.5%;
+  }
+
+  #btn-cake-flavors-inline {
+    left: 6.5%;
+    top: 85.1%;
+    width: 23.8%;
+    height: 6.2%;
+  }
+
+  #btn-cake-order-inline {
+    left: 32.6%;
+    top: 85.1%;
+    width: 18.8%;
+    height: 6.2%;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 3%;
+    left: 2%;
+    z-index: 10;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(139, 90, 43, 0.86);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .countdown-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 20;
+    height: 4px;
+    background: rgba(139, 90, 43, 0.5);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .attract-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #241812;
+    background:
+      linear-gradient(90deg, rgba(251,247,240,0.96) 0%, rgba(251,247,240,0.90) 43%, rgba(251,247,240,0.36) 100%),
+      var(--slide-image);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .attract-overlay.active { display: flex; }
+
+  .attract-panel {
+    position: relative;
+    width: min(100vw, calc(100vh * 1448 / 1086));
+    height: min(100vh, calc(100vw * 1086 / 1448));
+    padding: 90px 82px 72px;
+    border: 1px solid rgba(60, 42, 27, 0.35);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .attract-kicker {
+    color: #9b2420;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .attract-title {
+    width: 54%;
+    font-family: Georgia, serif;
+    font-size: 78px;
+    line-height: 1.02;
+    font-weight: 400;
+    margin-bottom: 22px;
+  }
+
+  .attract-copy {
+    width: 46%;
+    color: #5d5149;
+    font-size: 30px;
+    line-height: 1.38;
+    margin-bottom: 34px;
+  }
+
+  .tap-pill {
+    width: max-content;
+    border: 1px solid rgba(155, 36, 32, 0.34);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #9b2420;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 16px 26px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .slide-dots {
+    position: absolute;
+    left: 82px;
+    bottom: 58px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .slide-dot {
+    width: 42px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(36, 24, 18, 0.22);
+  }
+
+  .slide-dot.active { background: #9b2420; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.72; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page active" id="page-home">
+  <div class="stage">
+    <img src="dessert 首頁.png?v=20260504-review" alt="Taiwan Way Dessert Welcome">
+    <button class="tap-zone" id="btn-pineapple" onclick="goTo('page-pineapple')" aria-label="Handmade Pineapple Cake"></button>
+    <button class="tap-zone" id="btn-tea" onclick="goTo('page-tea')" aria-label="Taiwan High Mountain Tea"></button>
+    <button class="tap-zone" id="btn-custom-cake" onclick="goTo('page-custom-cake')" aria-label="Custom Cake"></button>
+    <button class="tap-zone" id="btn-review" onclick="goTo('page-review')" aria-label="Review and Follow Us"></button>
+  </div>
+</div>
+
+<div class="page" id="page-pineapple">
+  <div class="stage">
+    <img src="鳳梨酥內頁.png?v=20260504-dessert" alt="Handmade Pineapple Cake">
+    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <div class="countdown-bar" id="bar-pineapple"></div>
+  </div>
+</div>
+
+<div class="page" id="page-tea">
+  <div class="stage">
+    <img src="高山烏龍內頁.png?v=20260504-dessert" alt="Taiwan High Mountain Tea">
+    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <div class="countdown-bar" id="bar-tea"></div>
+  </div>
+</div>
+
+<div class="page" id="page-custom-cake">
+  <div class="stage">
+    <img src="cake home 橫式.png?v=20260504-cake-home" alt="Custom Cakes">
+    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <button class="tap-zone" id="btn-cake-flavors-inline" onclick="goTo('page-cake-flavors')" aria-label="View Cake Flavors"></button>
+    <button class="tap-zone" id="btn-cake-order-inline" onclick="goTo('page-cake-order')" aria-label="How to Order Custom Cake"></button>
+    <div class="countdown-bar" id="bar-custom-cake"></div>
+  </div>
+</div>
+
+<div class="page" id="page-review">
+  <div class="stage">
+    <img src="review 內頁.png?v=20260504-review" alt="Review and Follow TaiwanWay">
+    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <div class="countdown-bar" id="bar-review"></div>
+  </div>
+</div>
+
+<div class="page" id="page-cake-flavors">
+  <div class="stage">
+    <div class="contain-page">
+      <img src="cake_flavors_page.png?v=20260504-dessert" alt="Cake Flavors">
+    </div>
+    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <div class="countdown-bar" id="bar-cake-flavors"></div>
+  </div>
+</div>
+
+<div class="page" id="page-cake-order">
+  <div class="stage">
+    <div class="contain-page">
+      <img src="cake_order_page.png?v=20260504-dessert" alt="How to Order Custom Cake">
+    </div>
+    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <div class="countdown-bar" id="bar-cake-order"></div>
+  </div>
+</div>
+
+<div class="attract-overlay active" id="attract-overlay" onclick="wakeUp()">
+  <div class="attract-panel">
+    <div class="attract-kicker" id="attract-kicker"></div>
+    <h2 class="attract-title" id="attract-title"></h2>
+    <p class="attract-copy" id="attract-copy"></p>
+    <div class="tap-pill">Tap to explore desserts and tea</div>
+    <div class="slide-dots" aria-hidden="true">
+      <div class="slide-dot active"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+      <div class="slide-dot"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const AUTO_RETURN = 20000;
+  const IDLE_TIME = 30000;
+  const SLIDE_TIME = 5500;
+  const attractSlides = [
+    {
+      kicker: 'Desserts and tea',
+      title: 'A quiet table for sweet moments.',
+      copy: 'Browse pineapple cakes, custom cakes, and Taiwan high mountain tea.',
+      image: 'url("dessert 首頁.png?v=20260504-review")'
+    },
+    {
+      kicker: 'Custom cakes',
+      title: 'Made for birthdays and special days.',
+      copy: 'Explore cake styles, flavors, sizes, and preorder details.',
+      image: 'url("cake home 橫式.png?v=20260504-cake-home")'
+    },
+    {
+      kicker: 'High mountain tea',
+      title: 'Pair warm tea with Taiwanese sweets.',
+      copy: 'Ask us about tea pairings, seasonal desserts, and cake availability.',
+      image: 'url("高山烏龍內頁.png?v=20260504-dessert")'
+    },
+    {
+      kicker: 'Stay connected',
+      title: 'Follow us or leave a review.',
+      copy: 'Scan the QR codes to find us on Instagram or share your TaiwanWay experience.',
+      image: 'url("review 內頁.png?v=20260504-review")'
+    }
+  ];
+
+  let returnTimer = null;
+  let idleTimer = null;
+  let attractTimer = null;
+  let activeSlide = 0;
+
+  function goTo(pageId) {
+    clearTimeout(returnTimer);
+    resetIdle();
+
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    const page = document.getElementById(pageId);
+    void page.offsetWidth;
+    page.classList.add('active');
+
+    if (pageId !== 'page-home') {
+      startCountdown(pageId);
+    }
+  }
+
+  function startCountdown(pageId) {
+    const barId = 'bar-' + pageId.replace('page-', '');
+    const bar = document.getElementById(barId);
+    if (!bar) return;
+
+    bar.style.transition = 'none';
+    bar.style.width = '100%';
+    void bar.offsetWidth;
+    bar.style.transition = 'width ' + (AUTO_RETURN / 1000) + 's linear';
+    bar.style.width = '0%';
+
+    returnTimer = setTimeout(() => goTo('page-home'), AUTO_RETURN);
+  }
+
+  function resetIdle() {
+    clearTimeout(idleTimer);
+    hideAttract();
+    idleTimer = setTimeout(showIdle, IDLE_TIME);
+  }
+
+  function showIdle() {
+    goTo('page-home');
+    showAttract();
+  }
+
+  function wakeUp() {
+    hideAttract();
+    resetIdle();
+  }
+
+  function showAttract() {
+    clearInterval(attractTimer);
+    setSlide(activeSlide);
+    document.getElementById('attract-overlay').classList.add('active');
+    attractTimer = setInterval(nextSlide, SLIDE_TIME);
+  }
+
+  function hideAttract() {
+    clearInterval(attractTimer);
+    document.getElementById('attract-overlay').classList.remove('active');
+  }
+
+  function nextSlide() {
+    activeSlide = (activeSlide + 1) % attractSlides.length;
+    setSlide(activeSlide);
+  }
+
+  function setSlide(index) {
+    const slide = attractSlides[index];
+    const overlay = document.getElementById('attract-overlay');
+    overlay.style.setProperty('--slide-image', slide.image);
+    document.getElementById('attract-kicker').textContent = slide.kicker;
+    document.getElementById('attract-title').textContent = slide.title;
+    document.getElementById('attract-copy').textContent = slide.copy;
+    document.querySelectorAll('.slide-dot').forEach((dot, dotIndex) => {
+      dot.classList.toggle('active', dotIndex === index);
+    });
+  }
+
+  document.addEventListener('touchstart', () => {
+    if (!document.getElementById('attract-overlay').classList.contains('active')) {
+      resetIdle();
+    }
+  }, { passive: true });
+  document.addEventListener('click', resetIdle);
+
+  setSlide(0);
+  showAttract();
+  idleTimer = setTimeout(showIdle, IDLE_TIME);
+</script>
+
+</body>
+</html>
