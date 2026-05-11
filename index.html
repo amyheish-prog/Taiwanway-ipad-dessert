@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Taiwan Way Dessert iPad</title>
+<title>Taiwan Way Cafe iPad</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -78,47 +78,36 @@
     transform: scale(0.985);
   }
 
-  #btn-pineapple {
-    left: 4.0%;
-    top: 43.5%;
-    width: 24.6%;
-    height: 18.0%;
-  }
+  /* === Home page tap zones (新ipad 首頁.png) === */
+  #btn-home-desserts        { left: 3.5%;  top: 42.0%; width: 24.0%; height: 17.5%; }
+  #btn-home-tea-drinks      { left: 28.5%; top: 42.0%; width: 24.0%; height: 17.5%; }
+  #btn-home-custom-cake     { left: 3.5%;  top: 60.5%; width: 24.0%; height: 17.5%; }
+  #btn-home-taiwanese-favs  { left: 28.5%; top: 60.5%; width: 24.0%; height: 17.5%; }
+  #btn-home-review          { left: 2.5%;  top: 90.5%; width: 27.0%; height: 7.5%; }
+  #btn-home-follow          { left: 70.0%; top: 90.5%; width: 27.5%; height: 7.5%; }
 
-  #btn-tea {
-    left: 29.4%;
-    top: 43.5%;
-    width: 23.0%;
-    height: 18.0%;
-  }
+  /* === Common: Top-left Back / Top-right Home pill buttons (baked in image) === */
+  .btn-page-back { left: 1.5%; top: 2.5%; width: 12.5%; height: 6.5%; }
+  .btn-page-home { left: 86.0%; top: 2.5%; width: 12.5%; height: 6.5%; }
 
-  #btn-custom-cake {
-    left: 4.0%;
-    top: 62.7%;
-    width: 24.6%;
-    height: 18.5%;
-  }
+  /* === Review / Follow page: Back to Menu pill (bottom center) === */
+  .btn-back-to-menu { left: 28.0%; top: 87.0%; width: 44.0%; height: 11.0%; }
 
-  #btn-review {
-    left: 29.4%;
-    top: 62.7%;
-    width: 23.0%;
-    height: 18.5%;
-  }
+  /* === Taiwanese Favorites category tap zones === */
+  #btn-tf-braised-pork  { left: 3.5%;  top: 38.0%; width: 28.0%; height: 19.5%; }
+  #btn-tf-beef-noodle   { left: 33.0%; top: 38.0%; width: 28.0%; height: 19.5%; }
+  #btn-tf-sakura        { left: 3.5%;  top: 60.0%; width: 28.0%; height: 19.5%; }
+  #btn-tf-chicken       { left: 33.0%; top: 60.0%; width: 28.0%; height: 19.5%; }
+  #btn-tf-review        { left: 2.5%;  top: 90.5%; width: 27.0%; height: 7.5%; }
+  #btn-tf-follow        { left: 70.0%; top: 90.5%; width: 27.5%; height: 7.5%; }
 
-  #btn-cake-flavors-inline {
-    left: 6.5%;
-    top: 85.1%;
-    width: 23.8%;
-    height: 6.2%;
-  }
+  /* === Tea & Drinks category tap zones === */
+  #btn-td-bubble-tea { left: 3.5%;  top: 56.0%; width: 28.0%; height: 26.0%; }
+  #btn-td-hot-tea    { left: 33.0%; top: 56.0%; width: 28.0%; height: 26.0%; }
 
-  #btn-cake-order-inline {
-    left: 32.6%;
-    top: 85.1%;
-    width: 18.8%;
-    height: 6.2%;
-  }
+  /* === Custom Cake inline tap zones (existing) === */
+  #btn-cake-flavors-inline { left: 6.5%;  top: 85.1%; width: 23.8%; height: 6.2%; }
+  #btn-cake-order-inline   { left: 32.6%; top: 85.1%; width: 18.8%; height: 6.2%; }
 
   .back-btn {
     position: absolute;
@@ -222,32 +211,61 @@
 </head>
 <body>
 
+<!-- Home: Explore Taiwan Way Hub -->
 <div class="page active" id="page-home">
   <div class="stage">
-    <img src="dessert 首頁.png?v=20260504-review" alt="Taiwan Way Dessert Welcome">
-    <button class="tap-zone" id="btn-pineapple" onclick="goTo('page-pineapple')" aria-label="Handmade Pineapple Cake"></button>
-    <button class="tap-zone" id="btn-tea" onclick="goTo('page-tea')" aria-label="Taiwan High Mountain Tea"></button>
-    <button class="tap-zone" id="btn-custom-cake" onclick="goTo('page-custom-cake')" aria-label="Custom Cake"></button>
-    <button class="tap-zone" id="btn-review" onclick="goTo('page-review')" aria-label="Review and Follow Us"></button>
+    <img src="新ipad 首頁.png?v=20260511-v2" alt="Explore Taiwan Way">
+    <button class="tap-zone" id="btn-home-desserts" onclick="goTo('page-pineapple')" aria-label="Desserts and Pineapple Cake"></button>
+    <button class="tap-zone" id="btn-home-tea-drinks" onclick="goTo('page-tea-drinks')" aria-label="Tea and Drinks"></button>
+    <button class="tap-zone" id="btn-home-custom-cake" onclick="goTo('page-custom-cake')" aria-label="Custom Cake"></button>
+    <button class="tap-zone" id="btn-home-taiwanese-favs" onclick="goTo('page-taiwanese-favorites')" aria-label="Taiwanese Favorites"></button>
+    <button class="tap-zone" id="btn-home-review" onclick="goTo('page-review')" aria-label="Leave a review"></button>
+    <button class="tap-zone" id="btn-home-follow" onclick="goTo('page-follow')" aria-label="Follow us"></button>
   </div>
 </div>
 
+<!-- Desserts: direct to Pineapple Cake (new style with Back/Home) -->
 <div class="page" id="page-pineapple">
   <div class="stage">
-    <img src="鳳梨酥內頁.png?v=20260504-dessert" alt="Handmade Pineapple Cake">
-    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <img src="鳳梨酥內頁.png?v=20260511-v2" alt="Handmade Pineapple Cake">
+    <button class="tap-zone btn-page-back" onclick="goTo('page-home')" aria-label="Back"></button>
+    <button class="tap-zone btn-page-home" onclick="goTo('page-home')" aria-label="Home"></button>
     <div class="countdown-bar" id="bar-pineapple"></div>
   </div>
 </div>
 
-<div class="page" id="page-tea">
+<!-- Tea & Drinks category (new style with Back/Home) -->
+<div class="page" id="page-tea-drinks">
   <div class="stage">
-    <img src="高山烏龍內頁.png?v=20260504-dessert" alt="Taiwan High Mountain Tea">
-    <button class="back-btn" onclick="goTo('page-home')">←</button>
-    <div class="countdown-bar" id="bar-tea"></div>
+    <img src="tea drinks.png?v=20260511-v2" alt="Tea and Drinks">
+    <button class="tap-zone" id="btn-td-bubble-tea" onclick="goTo('page-bubble-tea')" aria-label="Bubble Tea"></button>
+    <button class="tap-zone" id="btn-td-hot-tea" onclick="goTo('page-hot-tea')" aria-label="Hot Tea"></button>
+    <button class="tap-zone btn-page-back" onclick="goTo('page-home')" aria-label="Back"></button>
+    <button class="tap-zone btn-page-home" onclick="goTo('page-home')" aria-label="Home"></button>
+    <div class="countdown-bar" id="bar-tea-drinks"></div>
   </div>
 </div>
 
+<!-- Bubble Tea detail (new style with Back/Home) -->
+<div class="page" id="page-bubble-tea">
+  <div class="stage">
+    <img src="珍奶內頁.png?v=20260511-v2" alt="Bubble Tea Varieties">
+    <button class="tap-zone btn-page-back" onclick="goTo('page-tea-drinks')" aria-label="Back"></button>
+    <button class="tap-zone btn-page-home" onclick="goTo('page-home')" aria-label="Home"></button>
+    <div class="countdown-bar" id="bar-bubble-tea"></div>
+  </div>
+</div>
+
+<!-- Hot Tea detail (old style — keep circular back) -->
+<div class="page" id="page-hot-tea">
+  <div class="stage">
+    <img src="高山烏龍內頁.png?v=20260504-dessert" alt="Taiwan High Mountain Tea">
+    <button class="back-btn" onclick="goTo('page-tea-drinks')">←</button>
+    <div class="countdown-bar" id="bar-hot-tea"></div>
+  </div>
+</div>
+
+<!-- Custom Cake hub (old style) -->
 <div class="page" id="page-custom-cake">
   <div class="stage">
     <img src="cake home 橫式.png?v=20260504-cake-home" alt="Custom Cakes">
@@ -258,34 +276,103 @@
   </div>
 </div>
 
-<div class="page" id="page-review">
-  <div class="stage">
-    <img src="review 內頁.png?v=20260504-review" alt="Review and Follow TaiwanWay">
-    <button class="back-btn" onclick="goTo('page-home')">←</button>
-    <div class="countdown-bar" id="bar-review"></div>
-  </div>
-</div>
-
+<!-- Cake Flavors (old style) -->
 <div class="page" id="page-cake-flavors">
   <div class="stage">
     <div class="contain-page">
       <img src="cake_flavors_page.png?v=20260504-dessert" alt="Cake Flavors">
     </div>
-    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <button class="back-btn" onclick="goTo('page-custom-cake')">←</button>
     <div class="countdown-bar" id="bar-cake-flavors"></div>
   </div>
 </div>
 
+<!-- Cake Order (old style) -->
 <div class="page" id="page-cake-order">
   <div class="stage">
     <div class="contain-page">
       <img src="cake_order_page.png?v=20260504-dessert" alt="How to Order Custom Cake">
     </div>
-    <button class="back-btn" onclick="goTo('page-home')">←</button>
+    <button class="back-btn" onclick="goTo('page-custom-cake')">←</button>
     <div class="countdown-bar" id="bar-cake-order"></div>
   </div>
 </div>
 
+<!-- Taiwanese Favorites category (new style with Back/Home + footer) -->
+<div class="page" id="page-taiwanese-favorites">
+  <div class="stage">
+    <img src="Taiwanese Favorites.png?v=20260511-v2" alt="Taiwanese Favorites">
+    <button class="tap-zone" id="btn-tf-braised-pork" onclick="goTo('page-braised-pork')" aria-label="Braised Pork Rice"></button>
+    <button class="tap-zone" id="btn-tf-beef-noodle" onclick="goTo('page-beef-noodle')" aria-label="Braised Beef Noodle Soup"></button>
+    <button class="tap-zone" id="btn-tf-sakura" onclick="goTo('page-sakura-shrimp')" aria-label="Sakura Shrimp Sticky Rice"></button>
+    <button class="tap-zone" id="btn-tf-chicken" onclick="goTo('page-chicken-rice')" aria-label="Chicken Rice"></button>
+    <button class="tap-zone" id="btn-tf-review" onclick="goTo('page-review')" aria-label="Leave a review"></button>
+    <button class="tap-zone" id="btn-tf-follow" onclick="goTo('page-follow')" aria-label="Follow us"></button>
+    <button class="tap-zone btn-page-back" onclick="goTo('page-home')" aria-label="Back"></button>
+    <button class="tap-zone btn-page-home" onclick="goTo('page-home')" aria-label="Home"></button>
+    <div class="countdown-bar" id="bar-taiwanese-favorites"></div>
+  </div>
+</div>
+
+<!-- Braised Pork Rice (old style) -->
+<div class="page" id="page-braised-pork">
+  <div class="stage">
+    <img src="滷肉飯介紹.png?v=20260504" alt="Braised Pork Rice">
+    <button class="back-btn" onclick="goTo('page-taiwanese-favorites')">←</button>
+    <div class="countdown-bar" id="bar-braised-pork"></div>
+  </div>
+</div>
+
+<!-- Braised Beef Noodle (old style) -->
+<div class="page" id="page-beef-noodle">
+  <div class="stage">
+    <img src="牛肉麵介紹.png?v=20260504" alt="Braised Beef Noodle Soup">
+    <button class="back-btn" onclick="goTo('page-taiwanese-favorites')">←</button>
+    <div class="countdown-bar" id="bar-beef-noodle"></div>
+  </div>
+</div>
+
+<!-- Sakura Shrimp Sticky Rice (old style) -->
+<div class="page" id="page-sakura-shrimp">
+  <div class="stage">
+    <img src="櫻花蝦油飯說明.png?v=20260511" alt="Sakura Shrimp Sticky Rice">
+    <button class="back-btn" onclick="goTo('page-taiwanese-favorites')">←</button>
+    <div class="countdown-bar" id="bar-sakura-shrimp"></div>
+  </div>
+</div>
+
+<!-- Chicken Rice (old style) -->
+<div class="page" id="page-chicken-rice">
+  <div class="stage">
+    <img src="雞肉飯說明.png?v=20260511" alt="Chicken Rice">
+    <button class="back-btn" onclick="goTo('page-taiwanese-favorites')">←</button>
+    <div class="countdown-bar" id="bar-chicken-rice"></div>
+  </div>
+</div>
+
+<!-- Review (new style — Back + Home + Back to Menu) -->
+<div class="page" id="page-review">
+  <div class="stage">
+    <img src="Review.png?v=20260511-v2" alt="Leave a Review">
+    <button class="tap-zone btn-page-back" onclick="goTo('page-home')" aria-label="Back"></button>
+    <button class="tap-zone btn-page-home" onclick="goTo('page-home')" aria-label="Home"></button>
+    <button class="tap-zone btn-back-to-menu" onclick="goTo('page-home')" aria-label="Back to Menu"></button>
+    <div class="countdown-bar" id="bar-review"></div>
+  </div>
+</div>
+
+<!-- Follow Us (new style — Back + Home + Back to Menu) -->
+<div class="page" id="page-follow">
+  <div class="stage">
+    <img src="Follow.png?v=20260511-v2" alt="Follow TaiwanWay">
+    <button class="tap-zone btn-page-back" onclick="goTo('page-home')" aria-label="Back"></button>
+    <button class="tap-zone btn-page-home" onclick="goTo('page-home')" aria-label="Home"></button>
+    <button class="tap-zone btn-back-to-menu" onclick="goTo('page-home')" aria-label="Back to Menu"></button>
+    <div class="countdown-bar" id="bar-follow"></div>
+  </div>
+</div>
+
+<!-- Attract overlay (idle slideshow) -->
 <div class="attract-overlay active" id="attract-overlay" onclick="wakeUp()">
   <div class="attract-panel">
     <div class="tap-pill">Tap to explore</div>
@@ -299,23 +386,29 @@
   const SLIDE_TIME_PHOTO = 5500;
   const SLIDE_TIME_INFO = 11000;
   const SLIDE_TIME_FEATURE = 15000;
-  const V = '?v=20260504-strawberry';
+  const V = '?v=20260511-v2';
   const attractSlides = [
-    { image: 'url("dessert 首頁.png' + V + '")',     duration: SLIDE_TIME_INFO    },
-    { image: 'url("鳳梨酥內頁.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
-    { image: 'url("page-42拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("page-43拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("page-44拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("草莓蛋糕.png' + V + '")',         duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("cake home 橫式.png' + V + '")',  duration: SLIDE_TIME_INFO    },
-    { image: 'url("page-45拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("page-46拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("page-47拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("page-48拷貝.png' + V + '")',     duration: SLIDE_TIME_PHOTO   },
-    { image: 'url("牛肉麵介紹.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
-    { image: 'url("滷肉飯介紹.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
-    { image: 'url("高山烏龍內頁.png' + V + '")',     duration: SLIDE_TIME_INFO    },
-    { image: 'url("review 內頁.png' + V + '")',      duration: SLIDE_TIME_INFO    }
+    { image: 'url("新ipad 首頁.png' + V + '")',         duration: SLIDE_TIME_INFO    },
+    { image: 'url("Taiwanese Favorites.png' + V + '")',  duration: SLIDE_TIME_INFO    },
+    { image: 'url("滷肉飯介紹.png' + V + '")',           duration: SLIDE_TIME_FEATURE },
+    { image: 'url("牛肉麵介紹.png' + V + '")',           duration: SLIDE_TIME_FEATURE },
+    { image: 'url("櫻花蝦油飯說明.png' + V + '")',       duration: SLIDE_TIME_FEATURE },
+    { image: 'url("雞肉飯說明.png' + V + '")',           duration: SLIDE_TIME_FEATURE },
+    { image: 'url("tea drinks.png' + V + '")',           duration: SLIDE_TIME_INFO    },
+    { image: 'url("珍奶內頁.png' + V + '")',             duration: SLIDE_TIME_FEATURE },
+    { image: 'url("高山烏龍內頁.png' + V + '")',         duration: SLIDE_TIME_INFO    },
+    { image: 'url("鳳梨酥內頁.png' + V + '")',           duration: SLIDE_TIME_FEATURE },
+    { image: 'url("草莓蛋糕.png' + V + '")',             duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("cake home 橫式.png' + V + '")',       duration: SLIDE_TIME_INFO    },
+    { image: 'url("page-42拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("page-43拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("page-44拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("page-45拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("page-46拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("page-47拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("page-48拷貝.png' + V + '")',          duration: SLIDE_TIME_PHOTO   },
+    { image: 'url("Review.png' + V + '")',               duration: SLIDE_TIME_INFO    },
+    { image: 'url("Follow.png' + V + '")',               duration: SLIDE_TIME_INFO    }
   ];
 
   (function buildDots() {
@@ -418,6 +511,63 @@
   setSlide(0);
   showAttract();
   idleTimer = setTimeout(showIdle, IDLE_TIME);
+
+  // ===== Swipe support =====
+  function attachSwipe(el, onLeft, onRight) {
+    let startX = 0, startY = 0, startT = 0;
+    el.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      startT = Date.now();
+    }, { passive: true });
+    el.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      const dt = Date.now() - startT;
+      if (dt > 600) return;          // 太慢不算 swipe
+      if (Math.abs(dx) < 50) return; // 距離太短不算
+      if (Math.abs(dy) > Math.abs(dx)) return; // 垂直滑動不處理
+      if (dx < 0) onLeft(); else onRight();
+    }, { passive: true });
+  }
+
+  // A. 輪播模式滑動：左滑下一張、右滑上一張
+  attachSwipe(
+    document.getElementById('attract-overlay'),
+    () => { activeSlide = (activeSlide + 1) % attractSlides.length; setSlide(activeSlide); scheduleNextSlide(); },
+    () => { activeSlide = (activeSlide - 1 + attractSlides.length) % attractSlides.length; setSlide(activeSlide); scheduleNextSlide(); }
+  );
+
+  // B. 同分類內滑動：循環瀏覽該分類所有子頁
+  const categorySequences = {
+    taiwaneseFavorites: ['page-braised-pork', 'page-beef-noodle', 'page-sakura-shrimp', 'page-chicken-rice'],
+    teaDrinks: ['page-bubble-tea', 'page-hot-tea']
+  };
+
+  function swipeInCategory(currentPageId, direction) {
+    for (const seq of Object.values(categorySequences)) {
+      const idx = seq.indexOf(currentPageId);
+      if (idx !== -1) {
+        const newIdx = direction === 'next'
+          ? (idx + 1) % seq.length
+          : (idx - 1 + seq.length) % seq.length;
+        goTo(seq[newIdx]);
+        return;
+      }
+    }
+  }
+
+  Object.values(categorySequences).flat().forEach(pageId => {
+    const el = document.getElementById(pageId);
+    if (el) {
+      attachSwipe(el,
+        () => swipeInCategory(pageId, 'next'),
+        () => swipeInCategory(pageId, 'prev')
+      );
+    }
+  });
 </script>
 
 </body>
